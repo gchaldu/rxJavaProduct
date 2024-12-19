@@ -22,11 +22,15 @@ public class ProductView {
             price = Double.parseDouble(input); // Intentamos convertir a Double
 
             if(price < 0) {
-                throw new InputNumberException("El precio no puede ser negativo");
+                throw new InputNumberException("El precio tiene que ser mayor a cero ni una cadena");
             }
 
             System.out.println("Ingrese el CANTIDAD del product");
             Integer quantity = scanner.nextInt();
+
+            if(quantity < 0) {
+                throw new InputNumberException("La cantidad tiene que ser mayor a cero");
+            }
 
             product = new Product(nombre,price,quantity);
 
