@@ -57,8 +57,6 @@ public class ProductView {
                 throw new InputNumberException("El id tiene que ser un numero");
             }
         }
-
-
         return id;
     }
 

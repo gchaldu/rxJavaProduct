@@ -5,6 +5,8 @@ import com.gchaldu.product.model.Product;
 import com.gchaldu.product.repository.ProductRepository;
 import com.gchaldu.product.view.ProductView;
 
+import java.util.InputMismatchException;
+
 public class ProductController {
 
     private ProductRepository productRepository;
@@ -42,12 +44,19 @@ public class ProductController {
     }
 
     public void update() throws InputNumberException {
-        Integer id = productView.getById();
-        Product product = productRepository.getProductById(id);
-        if(product!=null){
-            productView.view(product);
-            product = productView.update(product);
-            productRepository.updateProduct(product);
+
+        Integer id=null;
+
+        try{
+            id = productView.getById();
+            Product product = productRepository.getProductById(id);
+            if(product!=null){
+                productView.view(product);
+                product = productView.update(product);
+                productRepository.updateProduct(product);
+            }
+        } catch (InputNumberException e) {
+            System.out.println(e.getMessage());
         }
     }
 

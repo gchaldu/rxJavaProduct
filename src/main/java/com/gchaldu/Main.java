@@ -20,12 +20,13 @@ public class Main {
 
     public static void menu(ProductController principal) throws InputNumberException {
         Scanner scanner = new Scanner(System.in);
-        Integer op;
+        int op;
         do{
             System.out.println("1 - Agregar producto");
             System.out.println("2 - Eliminar producto");
             System.out.println("3 - Actualizar producto");
-            System.out.println("4 - Salir");
+            System.out.println("4 - Listar");
+            System.out.println("5 - Salir");
             op = scanner.nextInt();
             switch(op){
                 case 1:{
@@ -39,6 +40,9 @@ public class Main {
                 case 3:{
                     principal.update();
                 }
+                case 4:{
+                    principal.getProductRepository().listProducts();
+                }
             }
-        }while(op!=4);
+        }while(op!=5);
     }}
