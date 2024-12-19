@@ -22,4 +22,13 @@ public class ProductView {
 
         return product;
     }
+
+    public Integer getById(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Ingrese el id del producto");
+        Integer id = scanner.nextInt();
+
+        return id;
+    }
 }

@@ -1,4 +1,4 @@
-package com.gchaldu.product.model.controller;
+package com.gchaldu.product.controller;
 
 import com.gchaldu.product.model.Product;
 import com.gchaldu.product.repository.ProductRepository;
@@ -21,6 +21,12 @@ public class ProductController {
 
     public void list(){
         productRepository.listProducts();
+    }
+
+    public void delete(){
+        Integer id = productView.getById();
+        Product product = productRepository.getProductById(id);
+        productRepository.deleteProduct(product);
     }
 
     public ProductRepository getProductRepository() {

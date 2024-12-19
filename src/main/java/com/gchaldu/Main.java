@@ -1,6 +1,6 @@
 package com.gchaldu;
 
-import com.gchaldu.product.model.controller.ProductController;
+import com.gchaldu.product.controller.ProductController;
 import com.gchaldu.product.repository.ProductRepository;
 import com.gchaldu.product.view.ProductView;
 
@@ -21,9 +21,21 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Integer op;
         do{
-            principal.add();
-            System.out.println("Ingrese 1 si quiero salir");
+            System.out.println("1 - Agregar producto");
+            System.out.println("2 - Eliminar producto");
+            System.out.println("3 - Actualizar producto");
+            System.out.println("4 - Salir");
             op = scanner.nextInt();
-        }while(op!=1);
+            switch(op){
+                case 1:{
+                    principal.add();
+                    break;
+                }
+                case 2:{
+                    principal.delete();
+                    break;
+                }
+            }
+        }while(op!=4);
     }
 }

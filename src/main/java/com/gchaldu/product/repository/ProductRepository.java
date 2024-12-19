@@ -21,15 +21,46 @@ public class ProductRepository {
         productPublishSubject.onNext(productList);
     }
 
+    public Product getProductById(Integer id){
+        for (Product p: productList){
+            if(p.getId().equals(id)){
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public boolean deleteProduct(Product p){
+        if(p!=null){
+            productList.remove(p);
+            productPublishSubject.onNext(productList);
+            return true;
+        }
+        return false;
+    }
+
     public void listProducts(){
+
+
+
         productPublishSubject.subscribe( products -> {
+
+            System.out.println("LISTADO DE PRODUCTOS");
+
             products.forEach( product -> {
+                System.out.println("\n");
+                System.out.println("Id: " + product.getId());
                 System.out.println("Producto: " + product.getNombre());
                 System.out.println("Price: " + product.getPrice());
+                System.out.println("\n");
+                System.out.println("______________________________________");
+
             });
         }, throwable -> {
             System.out.println("throwable = " + throwable);
         });
+
+        System.out.println("----------------------------------------");
     }
 
     public List<Product> getProductList() {
