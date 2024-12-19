@@ -1,5 +1,6 @@
 package com.gchaldu.product.controller;
 
+import com.gchaldu.product.excepciones.InputNumberException;
 import com.gchaldu.product.model.Product;
 import com.gchaldu.product.repository.ProductRepository;
 import com.gchaldu.product.view.ProductView;
@@ -15,7 +16,12 @@ public class ProductController {
     }
 
     public void add(){
-        Product product = productView.add();
+        Product product = null;
+        try {
+            product = productView.add();
+        } catch (InputNumberException e) {
+            System.out.println(e.getMessage());
+        }
         productRepository.addProduct(product);
     }
 

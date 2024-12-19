@@ -1,24 +1,41 @@
 package com.gchaldu.product.view;
 
+import com.gchaldu.product.excepciones.InputNumberException;
 import com.gchaldu.product.model.Product;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ProductView {
 
-    public Product add(){
+    public Product add() throws InputNumberException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Ingrese el NOMBRE del product");
         String nombre = scanner.nextLine();
+        Double price;
+        Product product;
 
-        System.out.println("Ingrese el PRECIO del product");
-        Double price = scanner.nextDouble();
+        try {
+            System.out.println("Ingrese el PRECIO del producto");
+            String input = scanner.nextLine(); // Primero leemos como String
+            price = Double.parseDouble(input); // Intentamos convertir a Double
 
-        System.out.println("Ingrese el CANTIDAD del product");
-        Integer quantity = scanner.nextInt();
+            if(price < 0) {
+                throw new InputNumberException("El precio no puede ser negativo");
+            }
 
-        Product product = new Product(nombre,price,quantity);
+            System.out.println("Ingrese el CANTIDAD del product");
+            Integer quantity = scanner.nextInt();
+
+            product = new Product(nombre,price,quantity);
+
+        } catch (NumberFormatException e) {
+            throw new InputNumberException("El dato ingresado no es un número válido");
+        } catch (InputMismatchException e) {
+            scanner.nextLine(); // Limpiamos el buffer del scanner
+            throw new InputNumberException("El dato ingresado no es un número válido");
+        }
 
         return product;
     }
