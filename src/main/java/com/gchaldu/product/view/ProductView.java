@@ -42,20 +42,22 @@ public class ProductView {
 
     public Integer getById() throws InputNumberException{
         Scanner scanner = new Scanner(System.in);
-        Integer id=0;
+        Integer id=null;
 
-        try{
+        while (id==null){
+            try{
+                System.out.println("Ingrese el id del producto");
+                String txtId = scanner.nextLine();
+                id = Integer.parseInt(txtId);
 
-            System.out.println("Ingrese el id del producto");
-            String txtId = scanner.nextLine();
-            id = Integer.parseInt(txtId);
-
-            if(id<0){
-                throw new InputNumberException("El id tienen que ser un numero");
+                if(id<0){
+                    throw new InputNumberException("El id tiene que ser un numero mayor a cero");
+                }
+            } catch (NumberFormatException | InputMismatchException e) {
+                throw new InputNumberException("El id tiene que ser un numero");
             }
-        } catch (NumberFormatException | InputMismatchException e) {
-            throw new InputNumberException("El dato ingresado no es un número válido");
         }
+
 
         return id;
     }

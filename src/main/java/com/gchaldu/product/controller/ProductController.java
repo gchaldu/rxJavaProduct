@@ -29,10 +29,16 @@ public class ProductController {
         productRepository.listProducts();
     }
 
-    public void delete() throws InputNumberException {
-        Integer id = productView.getById();
-        Product product = productRepository.getProductById(id);
-        productRepository.deleteProduct(product);
+    public void delete() {
+
+        Integer id = null;
+        try {
+            id = productView.getById();
+            Product product = productRepository.getProductById(id);
+            productRepository.deleteProduct(product);
+        } catch (InputNumberException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void update() throws InputNumberException {
