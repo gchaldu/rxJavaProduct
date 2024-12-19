@@ -35,6 +35,9 @@ public class Main {
                     principal.delete();
                     break;
                 }
+                case 3:{
+                    principal.update();
+                }
             }
         }while(op!=4);
     }

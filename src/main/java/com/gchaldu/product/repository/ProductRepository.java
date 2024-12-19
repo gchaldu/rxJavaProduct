@@ -39,20 +39,25 @@ public class ProductRepository {
         return false;
     }
 
+    public void updateProduct(Product p){
+        if(p!=null){
+            int index = productList.indexOf(p);
+            productList.set(index, p);
+            productPublishSubject.onNext(productList);
+        }
+    }
+
     public void listProducts(){
-
-
+        System.out.println("LISTADO DE PRODUCTOS");
 
         productPublishSubject.subscribe( products -> {
-
-            System.out.println("LISTADO DE PRODUCTOS");
 
             products.forEach( product -> {
                 System.out.println("\n");
                 System.out.println("Id: " + product.getId());
                 System.out.println("Producto: " + product.getNombre());
                 System.out.println("Price: " + product.getPrice());
-                System.out.println("\n");
+                System.out.println("Quantity: " + product.getQuantity());
                 System.out.println("______________________________________");
 
             });

@@ -29,6 +29,16 @@ public class ProductController {
         productRepository.deleteProduct(product);
     }
 
+    public void update(){
+        Integer id = productView.getById();
+        Product product = productRepository.getProductById(id);
+        if(product!=null){
+            productView.view(product);
+            product = productView.update(product);
+            productRepository.updateProduct(product);
+        }
+    }
+
     public ProductRepository getProductRepository() {
         return productRepository;
     }
