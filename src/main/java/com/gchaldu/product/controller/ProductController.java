@@ -29,13 +29,13 @@ public class ProductController {
         productRepository.listProducts();
     }
 
-    public void delete(){
+    public void delete() throws InputNumberException {
         Integer id = productView.getById();
         Product product = productRepository.getProductById(id);
         productRepository.deleteProduct(product);
     }
 
-    public void update(){
+    public void update() throws InputNumberException {
         Integer id = productView.getById();
         Product product = productRepository.getProductById(id);
         if(product!=null){

@@ -1,13 +1,14 @@
 package com.gchaldu;
 
 import com.gchaldu.product.controller.ProductController;
+import com.gchaldu.product.excepciones.InputNumberException;
 import com.gchaldu.product.repository.ProductRepository;
 import com.gchaldu.product.view.ProductView;
 
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InputNumberException {
 
         ProductView productView = new ProductView();
         ProductRepository productRepository = new ProductRepository();
@@ -17,7 +18,7 @@ public class Main {
         Main.menu(productController);
     }
 
-    public static void menu(ProductController principal){
+    public static void menu(ProductController principal) throws InputNumberException {
         Scanner scanner = new Scanner(System.in);
         Integer op;
         do{

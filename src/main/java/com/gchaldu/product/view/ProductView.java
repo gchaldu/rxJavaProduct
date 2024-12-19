@@ -10,16 +10,15 @@ public class ProductView {
 
     public Product add() throws InputNumberException {
         Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Ingrese el NOMBRE del product");
-        String nombre = scanner.nextLine();
-        Double price;
         Product product;
 
         try {
+            System.out.println("Ingrese el NOMBRE del product");
+            String nombre = scanner.nextLine();
+
             System.out.println("Ingrese el PRECIO del producto");
             String input = scanner.nextLine(); // Primero leemos como String
-            price = Double.parseDouble(input); // Intentamos convertir a Double
+            Double price = Double.parseDouble(input); // Intentamos convertir a Double
 
             if(price < 0) {
                 throw new InputNumberException("El precio tiene que ser mayor a cero ni una cadena");
@@ -34,21 +33,29 @@ public class ProductView {
 
             product = new Product(nombre,price,quantity);
 
-        } catch (NumberFormatException e) {
-            throw new InputNumberException("El dato ingresado no es un número válido");
-        } catch (InputMismatchException e) {
-            scanner.nextLine(); // Limpiamos el buffer del scanner
+        } catch (NumberFormatException | InputMismatchException e) {
             throw new InputNumberException("El dato ingresado no es un número válido");
         }
 
         return product;
     }
 
-    public Integer getById(){
+    public Integer getById() throws InputNumberException{
         Scanner scanner = new Scanner(System.in);
+        Integer id=0;
 
-        System.out.println("Ingrese el id del producto");
-        Integer id = scanner.nextInt();
+        try{
+
+            System.out.println("Ingrese el id del producto");
+            String txtId = scanner.nextLine();
+            id = Integer.parseInt(txtId);
+
+            if(id<0){
+                throw new InputNumberException("El id tienen que ser un numero");
+            }
+        } catch (NumberFormatException | InputMismatchException e) {
+            throw new InputNumberException("El dato ingresado no es un número válido");
+        }
 
         return id;
     }
@@ -59,7 +66,7 @@ public class ProductView {
         System.out.println("Precio: " +  product.getPrice());
     }
 
-    public Product update(Product product){
+    public Product update(Product product) throws InputNumberException {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese un opcion para actualizar el producto");
@@ -106,40 +113,80 @@ public class ProductView {
 
         return nombre;
     }
-    public Double setPrice(){
+    public Double setPrice() throws InputNumberException{
 
         Scanner scanner = new Scanner(System.in);
+        Double price = 0d;
 
-        System.out.println("Ingrese el PRECIO del product");
-        Double price = scanner.nextDouble();
+        try{
+            System.out.println("Ingrese el PRECIO del product");
+            String txtPrice = scanner.nextLine();
+            price = Double.parseDouble(txtPrice);
+
+            if(price<0){
+                throw new InputNumberException("El dato ingresado es menor a cero");
+            }
+
+        }catch (InputMismatchException | NumberFormatException e){
+            throw new InputNumberException("El numero ingreso no es un numero");
+        }
 
         return price;
     }
 
-    public Integer setQuantity(){
+    public Integer setQuantity() throws InputNumberException{
 
         Scanner scanner = new Scanner(System.in);
+        Integer quantity=0;
+        try{
 
-        System.out.println("Ingrese el CANTIDAD del product");
-        Integer quantity = scanner.nextInt();
+            System.out.println("Ingrese el CANTIDAD del product");
+            String txtQuantity = scanner.nextLine();
+            quantity = Integer.parseInt(txtQuantity);
+
+            if(quantity<0){
+                throw new InputNumberException("La cantidad ingresada no puede ser menor a 0");
+            }
+
+        }catch (NumberFormatException | InputMismatchException e){
+            throw new InputNumberException("La cantidad ingresada no es un numero");
+        }
 
         return quantity;
     }
 
-    public Product setAll(){
+    public Product setAll() throws InputNumberException{
 
         Scanner scanner = new Scanner(System.in);
+        Product product=null;
 
-        System.out.println("Ingrese el NOMBRE del product");
-        String nombre = scanner.nextLine();
+        try{
 
-        System.out.println("Ingrese el PRECIO del product");
-        Double price = scanner.nextDouble();
+            System.out.println("Ingrese el NOMBRE del product");
+            String nombre = scanner.nextLine();
 
-        System.out.println("Ingrese el CANTIDAD del product");
-        Integer quantity = scanner.nextInt();
+            System.out.println("Ingrese el PRECIO del product");
+            String txtPrice = scanner.nextLine();
+            Double price = Double.parseDouble(txtPrice);
 
-        Product product = new Product(nombre,price,quantity);
+            if(price<0){
+                throw new InputNumberException("El dato ingresado no puede ser negativo");
+            }
+
+            System.out.println("Ingrese el CANTIDAD del product");
+            String txtQuantity = scanner.nextLine();
+            Integer quantity = Integer.parseInt(txtQuantity);
+
+
+            if(quantity<0){
+                throw new InputNumberException("El dato ingresado no puede ser negativo");
+            }
+
+            product = new Product(nombre,price,quantity);
+
+        }catch (NumberFormatException | InputMismatchException e){
+            throw new InputNumberException("El dato ingresado no es un numero");
+        }
 
         return product;
     }
