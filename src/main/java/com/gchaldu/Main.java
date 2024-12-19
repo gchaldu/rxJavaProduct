@@ -1,6 +1,6 @@
 package com.gchaldu;
 
-import com.gchaldu.product.controller.ProductController;
+import com.gchaldu.product.model.controller.ProductController;
 import com.gchaldu.product.repository.ProductRepository;
 import com.gchaldu.product.view.ProductView;
 

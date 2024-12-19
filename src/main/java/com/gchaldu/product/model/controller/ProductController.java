@@ -1,4 +1,4 @@
-package com.gchaldu.product.controller;
+package com.gchaldu.product.model.controller;
 
 import com.gchaldu.product.model.Product;
 import com.gchaldu.product.repository.ProductRepository;
